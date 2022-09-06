@@ -18,7 +18,9 @@ describe("Hunting word", () => {
   it('should search for "toalha" and return success', () => {
     const pattern = "toalha";
 
-    const result = Finder(grid, pattern).addMatcher(searchByRow);
+    const result = Finder(grid, pattern).addMatcher(searchByRow).run();
+
+    console.log(result.results);
 
     expect(result).not.toBe(null);
   });

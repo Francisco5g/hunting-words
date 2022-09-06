@@ -16,8 +16,14 @@ export interface MatcherResult {
 
 type MatcherFn = (grid: Grid, pattern: string) => MatcherResult[] | MatcherResult;
 
+interface FinderResult {
+  searchingPattern: string;
+  results: any;
+}
+
 export function Finder(grid: Grid, pattern: string) {
   const matchersStack: MatcherFn[] = [];
+
   const _grid = grid.map((row) => row.toLowerCase());
   const _pattern = pattern.toLowerCase();
 
@@ -27,10 +33,13 @@ export function Finder(grid: Grid, pattern: string) {
 
       return this;
     },
-    run() {
+    run(): FinderResult {
       const results = matchersStack.map((matcher) => matcher(_grid, _pattern));
 
-      return results;
+      return {
+        searchingPattern: pattern,
+        results,
+      };
     },
   };
 }
