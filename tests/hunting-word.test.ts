@@ -1,10 +1,25 @@
-import { patternSearch } from "../src"
+import Finder from "../src";
+import { searchByRow } from "../src/matchers/searchByRow";
 
 describe("Hunting word", () => {
-  it('should search for "car" pattern', () => {
-    const grid = ["LAMAKZOQKD", "HSJAKSCARI", "ADFKSJMZLA"]
-    const pattern = "car"
+  const grid = [
+    "ROTOALHASB",
+    "BFEABÇKPUA",
+    "LUVADIAUJL",
+    "TRPEOORXUA",
+    "EÔDSMGAADN",
+    "QIDIIATDÔÇ",
+    "ASAUNAÊOEA",
+    "DANÇADERUA",
+    "BOXELCINTO",
+    "OPILATESPF",
+  ];
 
-    const found = patternSearch(grid, pattern)
-  })
-})
+  it('should search for "toalha" and return success', () => {
+    const pattern = "toalha";
+
+    const result = Finder(grid, pattern).addMatcher(searchByRow);
+
+    expect(result).not.toBe(null);
+  });
+});
